@@ -166,17 +166,19 @@ BigInteger BigInteger::plus(const BigInteger& other) const {
     BigInteger temp;
     short int carry = 0;
     
-    for (; itSmall != itSmallFinish; itSmall--, itBig-- ){
+    while(itSmall != itSmallFinish){
         short int i = carry + itSmall.content() + itBig.content();
         carry = i / 10;
         temp.addFirst(i % 10);
+        itSmall--;
+        itBig--;
     }
     
-    
-    for (; itBig != itBigFinish; itBig-- ){
+    while (itBig != itBigFinish) {
         short int i = carry + itBig.content();
         carry = i / 10;
         temp.addFirst(i % 10);
+        itBig--;
     }
     
     if (carry)
