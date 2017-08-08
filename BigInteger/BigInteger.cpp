@@ -147,26 +147,18 @@ BigInteger BigInteger::plus(const BigInteger& other) const {
     iterator itBig(nullptr);
     iterator itSmall(nullptr);
     
-    iterator itBigFinish(nullptr);
-    iterator itSmallFinish(nullptr);
-    
     if (size > other.size){
         itBig = rbegin();
-        itBigFinish = rend();
         itSmall = other.rbegin();
-        itSmallFinish = other.rend();
-        
     } else{
         itBig = other.rbegin();
-        itBigFinish = other.rend();
         itSmall = rbegin();
-        itSmallFinish = rend();
     }
     
     BigInteger temp;
     short int carry = 0;
     
-    while(itSmall != itSmallFinish){
+    while(itSmall){
         short int i = carry + itSmall.content() + itBig.content();
         carry = i / 10;
         temp.addFirst(i % 10);
@@ -174,7 +166,7 @@ BigInteger BigInteger::plus(const BigInteger& other) const {
         itBig--;
     }
     
-    while (itBig != itBigFinish) {
+    while (itBig) {
         short int i = carry + itBig.content();
         carry = i / 10;
         temp.addFirst(i % 10);
